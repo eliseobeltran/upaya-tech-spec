@@ -4,6 +4,8 @@ We'll need an endpoint to create, update (and delete?) NetSuite `Customers`.
 ### Open Questions
 It sounds like NetSuite supports a data structure in which `Customers` act as "parent" objects for `Contacts`. Guidebook doesn't necessarily support this direct relationship (we loosely model it with Orgs + User Accounts, but not exclusively for billing purposes). Is it necessary for NS to receive a set of `Contacts` before creating a new `Customer`; or vice-versa, does NS expect a list of `Contacts` when it creates a new `Customer`?
 
+Is `email_address` a unique field on the `Customer` model in NetSuite? eg: Can NS have two `Customers` with the same email address? Note that `email` is a unique field on our `Account` model.
+
 ### Customer Creation
 This endpoint will allow us to create new `Customer` objects in NetSuite. Ideally, upon successful `Customer` creation, NS will return the `pk` of the Customer in NS so Guidebook can persist it on our end for future update + delete calls.
 
