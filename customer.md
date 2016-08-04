@@ -20,7 +20,10 @@ This endpoint will allow us to create new `Customer` objects in NetSuite. Ideall
     "guidebook_account_pk": 23423,
 
     # (Optionally)
-    "contacts": []
+    "contacts": [
+        {"email": "contact_1@example.com"},
+        {"email": "contact_2@example.com"},
+    ]
 }
 ```
 
@@ -67,10 +70,7 @@ We'll PATCH to the following endpoint with the following expectations. Unsure at
     "guidebook_account_pk": 23423,
 
     # (Optionally)
-    "contacts": [
-        {"email": "contact_1@example.com"},
-        {"email": "contact_2@example.com"},
-    ]
+    "contacts": []
 }
 ```
 
