@@ -5,7 +5,7 @@ This repository outlines the general communication flow, request/response cycle 
 This is our understanding of the models in SalesForce, Guidebook and NetSuite and the relation + mapping between each of them.
 
 |SalesForce|Guidebook|NetSuite|Notes|
-|-|-|-|-|
+|----|----|----|----|
 |Customer|Account|Customer|Guidebook does not have a parent `Customer` model.|
 |Contact| ... |Contact|It is my understanding that both SFDC + NS have `Contacts` that get rolled up into a parent `Customer` object. It is _not_ necessary for Guidebook to track these users. Is it 100% necessary for these objects to get passed into NS from SFDC? If so, why?|
 |Opportunity > Quote|Order|Invoice|Internal question to understand if we need to store SFDC `quote_id` on Guidebook's `Order` model.|
@@ -20,7 +20,7 @@ We'd prefer to use JSON as the communication language for both requests and resp
 #### Endpoints
 Below are the endpoints we'll need to come to agreement on. Note that I'm excluding `401 - Unauthorized` and `403 - Forbidden` status codes in these documents; we're working under the assumption that those will be implicitly handled by whatever token + secret key auth scheme that NetSuite provides.
 
-* [Customers](#cusomters.md)
+* [Customers](customers.md)
 * Contacts (TBD)
 
 ## Callbacks
