@@ -20,7 +20,7 @@ We'd prefer to use JSON as the communication language for both requests and resp
 #### Endpoints
 Below are the endpoints we'll need to come to agreement on. Note that I'm excluding `401 - Unauthorized` and `403 - Forbidden` status codes in these documents; we're working under the assumption that those will be implicitly handled by whatever token + secret key auth scheme that NetSuite provides.
 
-* [Customers](customers.md)
+* [Customers](customer.md)
 * Contacts (TBD)
 
 ## Callbacks
