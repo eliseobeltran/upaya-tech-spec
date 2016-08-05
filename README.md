@@ -22,7 +22,8 @@ Below are the endpoints we'll need to come to agreement on. Note that I'm exclud
 
 * [Customers](customer.md)
 * Contacts (TBD)
-* Invoices (coming...)
+* [Products](product.md)
+* [Invoices](invoice.md)
 * Payments (coming...)
 
 ## Callbacks
