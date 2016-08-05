@@ -49,11 +49,11 @@ This endpoint will allow us to create new `Invoice` objects in NetSuite. Ideally
 * `201 - Created`:
   * Description: A new Invoice was successfully created in NS.
   * Response:
-    ```json
-    {
-        "invoice_id": 12345
-    }
-    ```
+  ```json
+  {
+      "invoice_id": 12345
+  }
+  ```
 * `400 - Bad Request`:
   * Description: NS could not create a new Invoice record b/c invalid or incomplete data was submitted.
   * Response:
@@ -104,21 +104,21 @@ If `Invoice` objects in NetSuite are immutable, there shouldn't be a need for th
 * `200 - OK`:
   * Description: An existing Invoice was successfully updated in NS.
   * Response:
-    ```json
-    {
-        "invoice_id": 12345
-    }
-    ```
+  ```json
+  {
+      "invoice_id": 12345
+  }
+  ```
 * `400 - Bad Request`:
   * Description: NS could not update the Invoice record b/c invalid or incomplete data was submitted.
   * Response:
-    ```json
-    {
-        "errors": {
-            "etc...": "...."
-        }
-    }
-    ```
+  ```json
+  {
+      "errors": {
+          "etc...": "...."
+      }
+  }
+  ```
 * `404 - Not Found`:
   * Description: NS could not find the specified `Invoice` record.
   * Response:
@@ -154,26 +154,26 @@ That said, here is the what we would expect that endpoint to look like.
 * `200 - OK`:
   * Description: An existing Invoice was successfully fetched in NS.
   * Response:
-    ```json
-    {
-        "customer_id": 12345,
-        "items": [
-            {
-                "product_id": 1,
-                "quantity": 5,
-                "region_and_currency": "US:USD",
-                "price_per_product": 500,
-                "payment_due_date": "2015-06-02:00:00:00 - UTC",
-                "term_start_date": "2015-05-02:00:00:00 - UTC",
-                "term_end_date": "2016-05-02:00:00:00 - UTC"
-            }
-        ],
-        "account_executive_user_id": 123,
-        "account_manager_user_id": 125,
-        "sales_development_rep_user_id": 129,
-        "send_invoice_email": false,
-    }
-    ```
+  ```json
+  {
+      "customer_id": 12345,
+      "items": [
+          {
+              "product_id": 1,
+              "quantity": 5,
+              "region_and_currency": "US:USD",
+              "price_per_product": 500,
+              "payment_due_date": "2015-06-02:00:00:00 - UTC",
+              "term_start_date": "2015-05-02:00:00:00 - UTC",
+              "term_end_date": "2016-05-02:00:00:00 - UTC"
+          }
+      ],
+      "account_executive_user_id": 123,
+      "account_manager_user_id": 125,
+      "sales_development_rep_user_id": 129,
+      "send_invoice_email": false,
+  }
+  ```
 * `404 - Not Found`:
   * Description: NS could not find the specified `Invoice` record.
   * Response:
