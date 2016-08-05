@@ -18,6 +18,11 @@ Since our product catalog will remain fairly static, do we even need endpoints t
 ### Product Creation
 This endpoint will allow us to create new `Product` objects in NetSuite. Ideally, upon successful `Product` creation, NS will return the `pk` of the Product in NS so Guidebook can persist it on our end for future calls.
 
+A few notes here:
+
+* `Product.name` is unique in Guidebook.
+* `Product.price` is a json dict in which the keys are region + currency code and the values are the price of the product in that region + currency in their smallest common denominator (eg: USD cents).
+
 **URL Pattern:** `guidebook-prod.netsuite.com/product/`
 
 **Method:** `POST`
