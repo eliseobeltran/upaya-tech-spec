@@ -1,19 +1,17 @@
 # Invoice API
-We'll need an endpoint to create NetSuite `Invoices`. Depending on the answers to the questions below, we'll have a better understanding of whether or not update and delete functionality on these objects is required.
+We'll need an endpoint to create NetSuite `Invoices`. We are thinking of NetSuite `Invoices` as immutable objects that are created _after_ a corresponding Guidebook `Order` has been "signed off" by both the customer and Guidebook.
 
-### Open Questions
-**When Do We Create Invoices:**
-We are working under the assumption that `Orders` in Guidebook which map to `Invoices` in NetSuite, will originate from Guidebook and be passed to NS in order for NS to have record of this and to send the invoice to the customer.
+-----------
 
-I think we're still fuzzy on _when_ this should happen. Is Guidebook responsible for sending emails to the customer during the quote negotiation process?
+### Data Flow
+We are envisioning a data flow from Guidebook into NetSuite like so:
 
-Do we need to use NetSuite at all for emailing the customer? Or can Guidebook take care of all customer communication between and only create `Invoices` _after_ the `Order` has been finalized and signed off by both parties?
-
-**Payment Frequency:**
-Will we need to create `Invoice` objects in NetSuite every time we require payment from a customer?
-
-For example, if a customer purchases 1 Guide and opts to pay quarterly, do we need to create 4 `Invoice` objects in NetSuite? Or can we simply create a single `Invoice` and denote the payment frequency within it?
-
+1. A Salesperson creates an `Order` in Guidebook (which is in a "quote" state).
+1. Guidebook emails the client the quote details.
+1. The two sides negotiate.
+1. The two sides come to an agreement, Sales Ops approves and the `Order` is flipped to an "accepted" state.
+1. Guidebook pushes the `Order` into NetSuite as an `Invoice`.
+1. The `Invoice` is simply a source of financial record keeping in NetSuite; there is no need to update an existing `Invoice` object.
 
 -----------
 
@@ -44,57 +42,36 @@ This endpoint will allow us to create new `Invoice` objects in NetSuite. Ideally
     "account_executive_user_id": 123,
     "account_manager_user_id": 125,
     "sales_development_rep_user_id": 129,
-    "send_invoice_email": false,
 }
 ```
 
 **Expected Responses:**
-  * `201 - Created`:
-    * Description: A new Invoice was successfully created in NS.
-    * Response:
+* `201 - Created`:
+  * Description: A new Invoice was successfully created in NS.
+  * Response:
     ```json
     {
         "invoice_id": 12345
     }
-  ```
-  * `400 - Bad Request`:
-    * Description: NS could not create a new Invoice record b/c invalid or incomplete data was submitted.
-    * Response:
-    ```json
-    {
-        "errors": {
-            "customer_id": "This Customer does not exist in NetSuite.",
-            "items.0.quantity": "You cannot have a quantity less than 1.",
-            "etc...": "...."
-        }
-    }
     ```
+* `400 - Bad Request`:
+  * Description: NS could not create a new Invoice record b/c invalid or incomplete data was submitted.
+  * Response:
+  ```json
+  {
+      "errors": {
+          "customer_id": "This Customer does not exist in NetSuite.",
+          "items.0.quantity": "You cannot have a quantity less than 1.",
+          "etc...": "...."
+      }
+  }
+  ```
 
 
 ----------------
 
 ### Invoice Edit
-Unsure if we want this functionality. We were initially working under the assumption that NetSuite was a pure Accounting system and we would only use it to record finalized invoices + records of payment.
-
-It sounds like this may be drifting and we may want to use NetSuite for physically invoicing our customers (eg: sending emails) as well. If this is the case, the data _may_ flow like so:
-
-1. A Salesperson creates an `Order` in Guidebook.
-1. Guidebook pushing that data to NetSuite as an `Invoice`.
-1. Customer rejecting the `Invoice` because they want to renegotiate.
-1. Salesperson updates the existing `Order`, which is subsequently pushed to NetSuite and emailed to the `Customer`.
-
-If this^^ is the case, we will need `Invoice` edit functionality.
-
-That said, I think we would prefer to make `Invoices` immutable such that the flow worked like this:
-
-1. A Salesperson creates an `Order` in Guidebook (which is in a "quote" state internally).
-1. Guidebook emails the client the `Order` details.
-1. The two sides negotiate.
-1. The two sides come to an agreement; the `Order` is flipped to an "agreed" state.
-1. Guidebook pushes the `Order` into NetSuite as an `Invoice`.
-1. The `Invoice` is simply a source of financial record keeping in NetSuite; there is no need to update an existing `Invoice` object.
-
-However, if we want to update existing `Invoices`, we will want an interface like so:
+If `Invoice` objects in NetSuite are immutable, there shouldn't be a need for this endpoint. However,if for some reason we do find the need to update existing `Invoices`, we will want an interface like so:
 
 **URL Pattern:** `guidebook-prod.netsuite.com/invoice/<ns_invoice_id>/`
 
@@ -120,7 +97,6 @@ However, if we want to update existing `Invoices`, we will want an interface lik
     "account_executive_user_id": 123,
     "account_manager_user_id": 125,
     "sales_development_rep_user_id": 129,
-    "send_invoice_email": false,
 }
 ```
 
@@ -160,6 +136,8 @@ I'm skeptical that we need this functionality.
 
 ### Invoice Read
 Provides an interface to read a specific `Invoice` from NetSuite. I'm skeptical we'll need this if the idea is to have Guidebook be the source of truth that pushes data into these external systems.
+
+That said, here is the what we would expect that endpoint to look like.
 
 **URL Pattern:** `guidebook-prod.netsuite.com/invoice/<ns_invoice_id>/`
 
