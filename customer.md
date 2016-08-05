@@ -44,7 +44,7 @@ This endpoint will allow us to create new `Customer` objects in NetSuite. Ideall
 
 **Expected Responses:**
   * `201 - Created`:
-    * Description`: A new Customer was successfully created in NS.
+    * Description: A new Customer was successfully created in NS.
     * Response:
     ```json
     {
@@ -57,8 +57,8 @@ This endpoint will allow us to create new `Customer` objects in NetSuite. Ideall
     ```json
     {
         "errors": {
-            "First Name": "Invalid customer first name.",
-            "Email Address": "foo@bar.com already exists in this system.",
+            "first_name": "Invalid customer first name.",
+            "email": "foo@bar.com already exists in this system.",
             "etc...": "...."
         }
     }
