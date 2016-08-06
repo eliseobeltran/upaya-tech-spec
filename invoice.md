@@ -8,10 +8,10 @@ We are envisioning a data flow from Guidebook into NetSuite like so:
 
 1. A Salesperson creates an `Order` in Guidebook (which is in a "quote" state).
 1. Guidebook emails the client the quote details.
-1. The two sides negotiate.
-1. The two sides come to an agreement, Sales Ops approves and the `Order` is flipped to an "accepted" state.
+1. Optional negotiation.
+1. Both sides come to an agreement, Sales Ops approves and the `Order` is flipped to an "accepted" state.
 1. Guidebook pushes the `Order` into NetSuite as an `Invoice`.
-1. The `Invoice` is simply a source of financial record keeping in NetSuite; there is no need to update an existing `Invoice` object.
+1. The `Invoice` is simply a source of financial record keeping in NetSuite; there should not be a need to update any existing `Invoice` object.
 
 -----------
 
