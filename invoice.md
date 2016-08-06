@@ -1,5 +1,5 @@
 # Invoice API
-We'll need an endpoint to create NetSuite `Invoices`. We are thinking of NetSuite `Invoices` as immutable objects that are created _after_ a corresponding Guidebook `Order` has been "signed off" by both the customer and Guidebook.
+We'll need an endpoint to create NetSuite `Invoices`. We are thinking of NetSuite `Invoices` as immutable objects that are created _after_ a corresponding Guidebook `Order` has been accepted by both the customer and Guidebook.
 
 -----------
 
