@@ -32,8 +32,8 @@ This endpoint will allow us to create new `Payment` objects in NetSuite. Ideally
     "purchased_product_id": 1,
     "payment_processor_id": 1,
     "payment_processor_payment_id": "hashed-code",
-    "payment_due_date": "2015-05-02:00:00:00 - UTC",
-    "payment_received_date": "2015-02-02:00:00:00 - UTC",
+    "payment_due_date": "2015-05-02T00:00:00.496160+0000",
+    "payment_received_date": "2015-02-02T00:00:00.496160+0000",
 }
 ```
 
@@ -101,8 +101,8 @@ That said, here is the what we would expect that endpoint to look like.
       "purchased_product_id": 1,
       "payment_processor_id": 1,
       "payment_processor_payment_id": "hashed-code",
-      "payment_due_date": "2015-05-02:00:00:00 - UTC",
-      "payment_received_date": "2015-02-02:00:00:00 - UTC",
+      "payment_due_date": "2015-05-02T00:00:00.496160+0000",
+      "payment_received_date": "2015-02-02T00:00:00.496160+0000",
   }
   ```
 * `404 - Not Found`:
