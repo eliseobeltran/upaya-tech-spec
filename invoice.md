@@ -34,9 +34,9 @@ This endpoint will allow us to create new `Invoice` objects in NetSuite. Ideally
             "quantity": 5,
             "region_and_currency": "US:USD",
             "price_per_product": 500,
-            "payment_due_date": "2015-06-02:00:00:00 - UTC",
-            "term_start_date": "2015-05-02:00:00:00 - UTC",
-            "term_end_date": "2016-05-02:00:00:00 - UTC"
+            "payment_due_date": "2015-06-02T00:00:00.496160+0000",
+            "term_start_date": "2015-05-02T00:00:00.496160+0000",
+            "term_end_date": "2016-05-02T00:00:00.496160+0000"
         }
     ],
     "account_executive_user_id": 123,
