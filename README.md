@@ -27,8 +27,3 @@ Below are the endpoints we'll need to come to agreement on. Note that I'm exclud
 * [Payments](payment.md)
   * [Refunds](refund.md)
   * [Voided Orders](void.md)
-
-## Callbacks
-Are there any callbacks that we need to provide endpoints for? It seems unlikely as we have all agreed that we envision data originating in Guidebook and being pushed into NetSuite, but we could be missing something.
-
-Is there any data we see starting in NetSuite and being pushed back into Builder?
