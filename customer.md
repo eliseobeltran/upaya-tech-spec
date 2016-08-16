@@ -15,7 +15,9 @@ Does NetSuite need Salesperson details attached to `Customer` objects? ie: Do we
 
 
 ### Customer Creation
-This endpoint will allow us to create new `Customer` objects in NetSuite. Ideally, upon successful `Customer` creation, NS will return the `pk` of the Customer in NS so Guidebook can persist it on our end for future update + delete calls.
+This endpoint will allow us to create new `Customer` objects in NetSuite. Upon successful `Customer` creation, NS will return the `pk` of the Customer in NS so Guidebook can persist it on our end for future update + delete calls.
+
+If the `is_company` boolean is passed as `True`, Upaya will create a `Company Customer` in NS; otherwise, they will create a regular `User Customer`.
 
 **URL Pattern:** `guidebook-prod.netsuite.com/customer/`
 
@@ -26,18 +28,27 @@ This endpoint will allow us to create new `Customer` objects in NetSuite. Ideall
 {
     "first_name": "Foo",
     "last_name": "Bar",
-    "email": "foo@bar.com",
+    "company": "(Optional) Some Company Name",
+    "email": "foo@bar.com (will be the primary account holder)",
     "address": "2345 Some Street",
     "city": "Palo Alto",
     "state": "CA",
     "zip": 94054,
-    "business_unit": "EDU",  # choices==['EDU', 'CORP', 'ENTERPRISE']
+    "business_unit": "APAC",  # choices found in biz_units.md
+    "industry": "Education",  # choices found in industries.md
     "guidebook_account_pk": 23423,
+    "country_code": "US",  # choices tbd
 
-    # (Optionally)
+    # (Optional - if empty, it is assumed that this is a user customer)
     "contacts": [
-        {"email": "contact_1@example.com"},
-        {"email": "contact_2@example.com"},
+        {
+            "first_name": "foo",
+            "last_name": "bar",
+            "guidebook_account_pk": 123,
+            "email": "foo@bar.com",
+            "contact_type": "sold-to",  # choices tbd
+            "email": "contact_1@example.com"
+        },
     ]
 }
 ```
