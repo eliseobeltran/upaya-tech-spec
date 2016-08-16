@@ -27,3 +27,6 @@ Below are the endpoints we'll need to come to agreement on. Note that I'm exclud
 * [Payments](payment.md)
   * [Refunds](refund.md)
   * [Voided Orders](void.md)
+* Constants
+  * [Business Unit Choices](biz-units.md)
+  * [Industry Choices](industries.md)
