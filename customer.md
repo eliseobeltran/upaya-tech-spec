@@ -17,7 +17,7 @@ Does NetSuite need Salesperson details attached to `Customer` objects? ie: Do we
 ### Customer Creation
 This endpoint will allow us to create new `Customer` objects in NetSuite. Upon successful `Customer` creation, NS will return the `pk` of the Customer in NS so Guidebook can persist it on our end for future update + delete calls.
 
-If the `is_company` boolean is passed as `True`, Upaya will create a `Company Customer` in NS; otherwise, they will create a regular `User Customer`.
+If the `isperson` boolean is passed as `true`, Upaya will create a `User Customer` in NS; otherwise, they will create a `Company Customer`.
 
 **URL Pattern:** `guidebook-prod.netsuite.com/customer/`
 
@@ -26,9 +26,10 @@ If the `is_company` boolean is passed as `True`, Upaya will create a `Company Cu
 **POST Request Data:**
 ```json
 {
-    "first_name": "Foo",
-    "last_name": "Bar",
-    "company": "(Optional) Some Company Name",
+    "isperson": true,
+    "firstname": "Foo",
+    "lastname": "Bar",
+    "companyname": "(Optional) Some Company Name",
     "email": "foo@bar.com (will be the primary account holder)",
     "address": "2345 Some Street",
     "city": "Palo Alto",
